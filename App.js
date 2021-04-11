@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 
 import { TrashTurns, CleanTurns, StreetTurns } from './components';
+import styles from './styles';
 
 export default function App() {
   const [date, setDate] = useState(new Date());
@@ -10,21 +11,15 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <DatePicker date={date} minDate={new Date()} onDateChange={handleChange} />
-      <Text>Turni</Text>
-      <Text>Data:</Text>
+      <View style={styles.divider}>
+        <Text style={styles.h1}>Turni</Text>
+      </View>
+      <View style={styles.section}>
+        <DatePicker date={date} minDate={new Date()} onDateChange={handleChange} />
+      </View>
       <TrashTurns date={date} />
       <CleanTurns date={date} />
       <StreetTurns date={date} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

@@ -1,69 +1,55 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import data from '../data';
+import styles from '../styles';
 
 const initialDate = '2020-10-11';
 
 const CleanTurns = ({ date }) => {
-	const {
-		greenBathroom,
-		people
-	} = data;
+  const {
+    greenBathroom,
+    people
+  } = data;
 
-	const timeDivider = 1000 * 60 * 60 * 24 * 7;
+  const timeDivider = 1000 * 60 * 60 * 24 * 7;
 
-	const selectedDate = new Date(date);
-	
-	const dayOfTheWeek = selectedDate.getDay();
-	if(dayOfTheWeek !== 1) {
-		const offset = dayOfTheWeek - 1;
-		selectedDate.setDate(selectedDate.getDate() - offset);
-	}
+  const selectedDate = new Date(date);
+  
+  const dayOfTheWeek = selectedDate.getDay();
+  if(dayOfTheWeek !== 1) {
+    const offset = dayOfTheWeek - 1;
+    selectedDate.setDate(selectedDate.getDate() - offset);
+  }
 
-	const currentPersonIndex = Math.floor(((selectedDate - new Date(initialDate)) / timeDivider) % 5);
+  const currentPersonIndex = Math.floor(((selectedDate - new Date(initialDate)) / timeDivider) % 5);
 
-	let greenBathroomIndex = -1;
-	
-	if (!Object.values(greenBathroom).includes(currentPersonIndex)) {
-		greenBathroomIndex = greenBathroom[Math.floor((((selectedDate - new Date(initialDate)) / timeDivider) % 15))];
-	}
+  let greenBathroomIndex = -1;
+  
+  if (!Object.values(greenBathroom).includes(currentPersonIndex)) {
+    greenBathroomIndex = greenBathroom[Math.floor((((selectedDate - new Date(initialDate)) / timeDivider) % 15))];
+  }
 
-	return (
-		<View>
-			<View>
-				<View>
-					<Text>Turno delle pulizie: </Text>
-				</View>
-				<View>
-					<Text>
-            <Text>
-              {people[currentPersonIndex]}
-            </Text>
+  return (
+    <View style={styles.section}>
+        <Text style={styles.h2}>Turno delle pulizie: </Text>
+        <View style={styles.subsection}>
+          <Text style={styles.badge}>
+            {people[currentPersonIndex]}
           </Text>
-				</View>
-				<View>
-					<Text>
-						Pulire la cucina, pulire l'andito, spolverare
-					</Text>
-				</View>
-			</View>
-			{greenBathroomIndex > 0 && (
-				<View >
-          <View>
-            <Text>Pulizia bagno grande: </Text>
-          </View>
-          <View>
-            <Text>
-              <Text>
-                {people[greenBathroomIndex]}
-              </Text>
+        </View>
+      {greenBathroomIndex > 0 && (
+        <>
+          <Text style={styles.h2}>Pulizia bagno grande: </Text>
+          <View style={styles.subsection}>
+            <Text style={styles.badge}>
+              {people[greenBathroomIndex]}
             </Text>
           </View>
-        </View>
-			)}
-		</View>
-	);
+        </>
+      )}
+    </View>
+  );
 }
 
 export default CleanTurns;
