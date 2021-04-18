@@ -5,17 +5,18 @@ export default styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
+      marginVertical: 48,
     },
     divider: {
-        borderBottomColor: 'gainsboro',
-        borderBottomWidth: 1,
-        width: '75%',
-        alignItems : 'center',
+      borderBottomColor: 'gainsboro',
+      borderBottomWidth: 1,
+      width: '75%',
+      alignItems : 'center',
     },
     h1: {
-        fontSize: 36,
-        textAlign: 'center'
+      fontSize: 36,
+      textAlign: 'center'
     },
     h2: {
       fontSize: 24,
